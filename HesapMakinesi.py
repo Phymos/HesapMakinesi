@@ -13,12 +13,15 @@ def click_button(y):
     write_equation(y)
 
 def calculate():
-    pass
+    result = eval(space.get("1.0","end"))
+    space_text
+    space.delete("1.0","end")
+    space.insert("1.0",result)
 
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
 
-equal_button = tkinter.Button(text="=",command=lambda: calculate)
+equal_button = tkinter.Button(text="=",command=calculate)
 equal_button.grid(row=8,column=4)
 
 plus_button = tkinter.Button(text="+",command=lambda: click_button("+"))
