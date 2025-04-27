@@ -35,6 +35,13 @@ def delete():
     space.delete("1.0","end")
     space.insert("1.0",space_text)
 
+def inverse():
+    global space_text,space,result
+    result = 1/result
+    space_text = str(result)
+    space.delete("1.0", "end")
+    space.insert("1.0", space_text)
+
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
 
@@ -96,5 +103,8 @@ clear_button.grid(row=3,column=3)
 
 delete_button = tkinter.Button(text="←",font=("Arial",14,"bold"),command=delete)
 delete_button.grid(row=3,column=4)
+
+inverse_button = tkinter.Button(text="1/x",command=inverse)
+inverse_button.grid(row=4,column=1)
 
 window.mainloop()
