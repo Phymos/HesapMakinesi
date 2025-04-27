@@ -56,6 +56,13 @@ def square_root():
     space.delete("1.0","end")
     space.insert("1.0",space_text)
 
+def plus_minus():
+    global space,space_text,result
+    result = -1 * result
+    space_text = str(result)
+    space.delete("1.0","end")
+    space.insert("1.0",space_text)
+
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
 
@@ -126,5 +133,8 @@ square_button.grid(row=4,column=2)
 
 square_root_button = tkinter.Button(text="²√",command=square_root)
 square_root_button.grid(row=4,column=3)
+
+plus_minus_button = tkinter.Button(text="+/-",command=plus_minus)
+plus_minus_button.grid(row=8,column=1)
 
 window.mainloop()
