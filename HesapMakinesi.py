@@ -29,6 +29,12 @@ def calculate():
     space.insert("1.0",result)
     space_text = str(eval(space.get("1.0","end")))
 
+def delete():
+    global space,space_text
+    space_text = space_text[:-1]
+    space.delete("1.0","end")
+    space.insert("1.0",space_text)
+
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
 
@@ -87,5 +93,8 @@ ce_button.grid(row=3,column=2)
 
 clear_button = tkinter.Button(text="C",command=clear)
 clear_button.grid(row=3,column=3)
+
+delete_button = tkinter.Button(text="←",font=("Arial",14,"bold"),command=delete)
+delete_button.grid(row=3,column=4)
 
 window.mainloop()
