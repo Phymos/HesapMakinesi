@@ -42,6 +42,13 @@ def inverse():
     space.delete("1.0", "end")
     space.insert("1.0", space_text)
 
+def square():
+    global space_text,space,result
+    result = result ** 2
+    space_text = str(result)
+    space.delete("1.0","end")
+    space.insert("1.0",space_text)
+
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
 
@@ -106,5 +113,8 @@ delete_button.grid(row=3,column=4)
 
 inverse_button = tkinter.Button(text="1/x",command=inverse)
 inverse_button.grid(row=4,column=1)
+
+square_button = tkinter.Button(text="x²",command=square)
+square_button.grid(row=4,column=2)
 
 window.mainloop()
