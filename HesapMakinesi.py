@@ -4,6 +4,9 @@ window.minsize(width=400,height=400)
 
 result = 0
 space_text = ""
+memory = 0
+memory_list = []
+
 def write_equation(x):
     global space_text
     space_text = space_text + str(x)
@@ -62,6 +65,32 @@ def plus_minus():
     space_text = str(result)
     space.delete("1.0","end")
     space.insert("1.0",space_text)
+
+def memory_store():
+    global memory,memory_list,space_text
+    memory = int(space_text)
+    memory_list.append(memory)
+
+def memory_recall():
+    global memory,memory_list,result,space,space_text
+    if memory == None:
+        return
+    space_text = str(memory)
+    space.delete("1.0", "end")
+    space.insert("1.0", space_text)
+
+def memory_clear():
+    global memory,memory_list
+    memory_list = []
+    memory = None
+
+def memory_add():
+    global memory,memory_list,space_text
+    memory = memory + int(space_text)
+
+def memory_subtract():
+    global memory,memory_list,space_text
+    memory = memory - int(space_text)
 
 space = tkinter.Text(height=2,width=20)
 space.grid(row=1,column=1,columnspan=4)
@@ -136,5 +165,22 @@ square_root_button.grid(row=4,column=3)
 
 plus_minus_button = tkinter.Button(text="+/-",command=plus_minus)
 plus_minus_button.grid(row=8,column=1)
+
+dot_button = tkinter.Button(text=".",command=lambda: write_equation("."))
+dot_button.grid(row=8,column=3)
+
+memory_store_button = tkinter.Button(text="MS",command=memory_store)
+memory_store_button.grid(row=2,column=5)
+
+memory_recall_button = tkinter.Button(text="MR",command=memory_recall)
+memory_recall_button.grid(row=2,column=2)
+
+memory_clear_button = tkinter.Button(text="MC",command=memory_clear)
+memory_clear_button.grid(row=2,column=1)
+
+memory_add_button = tkinter.Button(text="M+",command=memory_add)
+memory_add_button.grid(row=2,column=3)
+
+#memory_subtract_button = tkinter.Button(text="M-",command=memory_subtract)
 
 window.mainloop()
