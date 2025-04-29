@@ -70,19 +70,32 @@ def memory_store():
     global memory,memory_list,space_text
     memory = int(space_text)
     memory_list.append(memory)
+    update_memory_list()
+
+def update_memory_list():
+    chosen_memory.set(memory_list[-1] if memory_list else "None")
+    memory_option["menu"].delete(0, "end")
+    for item in memory_list:
+        memory_option["menu"].add_command(label=item,command=tkinter._setit(chosen_memory,item))
+
+def select_memory(*args):
+    global memory, chosen_memory
+    if chosen_memory.get() != "None":
+        memory = int(chosen_memory.get())
+    update_memory_list()
 
 def memory_recall():
-    global memory,memory_list,result,space,space_text
-    if memory == None:
-        return
-    space_text = str(memory)
-    space.delete("1.0", "end")
-    space.insert("1.0", space_text)
+    global memory,space,space_text
+    if memory is not None:
+        space_text = str(memory)
+        space.delete("1.0", "end")
+        space.insert("1.0", space_text)
 
 def memory_clear():
     global memory,memory_list
     memory_list = []
     memory = None
+    update_memory_list()
 
 def memory_add():
     global memory,memory_list,space_text
@@ -181,6 +194,14 @@ memory_clear_button.grid(row=2,column=1)
 memory_add_button = tkinter.Button(text="M+",command=memory_add)
 memory_add_button.grid(row=2,column=3)
 
-#memory_subtract_button = tkinter.Button(text="M-",command=memory_subtract)
+memory_subtract_button = tkinter.Button(text="M-",command=memory_subtract)
+memory_subtract_button.grid(row=2,column=4)
+
+chosen_memory = tkinter.StringVar()
+chosen_memory.set("None")
+chosen_memory.trace("w", select_memory)
+
+memory_option = tkinter.OptionMenu(window,chosen_memory,*(memory_list if memory_list else ["None"]))
+memory_option.grid(row=2,column=6)
 
 window.mainloop()
